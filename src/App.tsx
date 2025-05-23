@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './App.css'
 import { CiMicrophoneOn,CiMicrophoneOff } from "react-icons/ci";
 import { datacontext } from './context/UserContext';
@@ -8,11 +8,12 @@ function App() {
   
   const { transcript, listening, resetTranscript } = useSpeechRecognition()
   const { speak ,stopSpeaking , isSpeaking }: any = useContext(datacontext);
-
+  const [responseMessage,setResponseMessage]=useState<string>("");
   useEffect(() => {
     if (!listening && transcript) {
       console.log("Transcript:", transcript);
       callGmini(transcript).then((res) => {
+        setResponseMessage(res as string);
         speak(res);
       });
       resetTranscript();
@@ -30,7 +31,8 @@ function App() {
       {
         isSpeaking ? (
           <>
-          <img src='./src/assets/AIVoice.gif' className='ai_speak'/>
+          <img src='./src/assets/AIVoice.gif'className='ai_speak'/>
+          <p className='geminiresponse'>{responseMessage}</p>
           <button onClick={stopSpeaking}>Stop Speaking <CiMicrophoneOff/></button>
           </>
         ) : (

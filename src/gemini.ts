@@ -5,9 +5,16 @@ import { GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({ apiKey: apikey });
 
 export default async function callGmini(prompt:string) {
+  
   const response = await ai.models.generateContent({
     model: "gemini-2.0-flash",
-    contents: prompt,
+    contents: `Answer briefly in 10 to 15 words. ${prompt}`,
+    config:{
+      responseMimeType:"text/plain",
+      temperature:1,
+      topP:0.95,
+      topK:40
+    }
   });
   // console.log(response.text);
   return response.text;
