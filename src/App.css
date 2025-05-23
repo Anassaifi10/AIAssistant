@@ -1,0 +1,52 @@
+.main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  gap: 20px;
+}
+#ai_girl
+{
+  height: 50%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+span{
+  background: linear-gradient(to right, #2dbabe, #a33ba8);
+  background-clip: text;
+  font-size: 2vmax;
+  color: transparent;
+}
+button{
+ height: 40px;
+ width: 180px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border: none;
+ border-radius: 10px;
+ cursor: pointer;
+ font-size: 20px;
+ background-color: #2dbabe;
+ transition: all 0.3s ease;
+}
+
+button:hover{
+ box-shadow: 2px 2px 50px #2dbabe;
+}
+
+.listening
+{
+  /* animation: listening-animation 1s infinite; */
+
+  width: 250px;
+  height: 200px;
+}
+.ai_speak
+{
+  width: 500px;
+  height: 100px;
+}
