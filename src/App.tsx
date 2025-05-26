@@ -13,8 +13,9 @@ function App() {
     if (!listening && transcript) {
       console.log("Transcript:", transcript);
       callGmini(transcript).then((res) => {
-        setResponseMessage(res as string);
-        speak(res);
+        let newres:string|undefined=res?.replace("google","Anas saifi")&&res.replace("Google","Anas saifi");
+        setResponseMessage(newres as string);
+        speak(newres);
       });
       resetTranscript();
     }
@@ -24,7 +25,16 @@ function App() {
   return (
     <div className='main'>
 
-      <img id='ai_girl' src="./src/assets/AIGirl.jfif" alt="" />
+      {/* <img id='ai_girl' src="./src/assets/AIBoy.mp4" alt="" /> */}
+
+      <video
+      src="./src/assets/AIBoy.mp4"
+      autoPlay
+      loop
+      muted
+      controls={false}
+      // style={{ width: "100%", maxWidth: "600px" }}
+    />
 
       <span>Hi I am Anas,Your Advanced Virtual Assistant</span>
       {listening ? (<img src='./src/assets/speak.gif' className='listening'/>):(<>
