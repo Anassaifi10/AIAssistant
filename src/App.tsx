@@ -4,6 +4,9 @@ import { CiMicrophoneOn,CiMicrophoneOff } from "react-icons/ci";
 import { datacontext } from './context/UserContext';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 import callGmini from './gemini';
+import AIBoy from './assets/AIBoy.jpg'
+import AISpeak from './assets/speak.gif'
+import AIVoice from './assets/AIVoice.gif'
 function App() {
   
   const { transcript, listening, resetTranscript } = useSpeechRecognition()
@@ -25,23 +28,23 @@ function App() {
   return (
     <div className='main'>
 
-      {/* <img id='ai_girl' src="./src/assets/AIBoy.mp4" alt="" /> */}
+      <img id='ai_girl' src={AIBoy} alt="" />
 
-      <video
+      {/* <video
       src="./src/assets/AIBoy.mp4"
       autoPlay
       loop
       muted
       controls={false}
       // style={{ width: "100%", maxWidth: "600px" }}
-    />
+    /> */}
 
       <span>Hi I am Anas,Your Advanced Virtual Assistant</span>
-      {listening ? (<img src='./src/assets/speak.gif' className='listening'/>):(<>
+      {listening ? (<img src={AISpeak} className='listening'/>):(<>
       {
         isSpeaking ? (
           <>
-          <img src='./src/assets/AIVoice.gif'className='ai_speak'/>
+          <img src={AIVoice}className='ai_speak'/>
           <p className='geminiresponse'>{responseMessage}</p>
           <button onClick={stopSpeaking}>Stop Speaking <CiMicrophoneOff/></button>
           </>
