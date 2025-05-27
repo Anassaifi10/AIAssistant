@@ -11,7 +11,6 @@ function UserContext({ children }: { children: React.ReactNode }) {
     text_speak.volume = 1;
     text_speak.rate = 1;
     text_speak.pitch = 1;
-    text_speak.lang = "hi-GB";
     // Try to select a female voice
     text_speak.onstart = () => {
       setIsSpeaking(true);
