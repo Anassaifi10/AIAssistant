@@ -4,7 +4,7 @@ import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({ apiKey: apikey });
 
-export default async function callGmini(prompt:string) {
+export default async function Gemini(prompt:string) {
   
   const response = await ai.models.generateContent({
     model: "gemini-2.0-flash",

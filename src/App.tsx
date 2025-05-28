@@ -3,59 +3,50 @@ import './App.css'
 import { CiMicrophoneOn, CiMicrophoneOff } from "react-icons/ci";
 import { datacontext } from './context/UserContext';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
-import callGmini from './gemini';
-import AIBoy from './assets/AIBoy.jpg'
+import AIGirl from './assets/AIGirl.jpg'
 import AISpeak from './assets/speak.gif'
 import AIVoice from './assets/AIVoice.gif'
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import ChatsContainer from './Components/ChatsContainer';
 function App() {
 
   const { transcript, listening, resetTranscript } = useSpeechRecognition()
-  const { speak, stopSpeaking, isSpeaking }: any = useContext(datacontext);
-  const [responseMessage, setResponseMessage] = useState<string>("");
+  const { stopSpeaking, isSpeaking, responseMessage, callGemini }: any = useContext(datacontext);
+
+  const [isshowChats, setIsShowChats] = useState<boolean>(false);
   useEffect(() => {
     if (!listening && transcript) {
-      
+
       callGemini(transcript.toLocaleLowerCase());
       resetTranscript();
     }
   }, [listening]);
 
-  async function callGemini(transcript: string) {
-    
-      console.log("Transcript:", transcript);
-    if (transcript.includes("open") && transcript.includes("youtube")) {
-      window.open("https://www.youtube.com", "_blank");
-    }
-    else if (transcript.includes("open") && transcript.includes("instagram")) {
-      window.open("https://www.instagram.com", "_blank");
-    } else if (transcript.includes("open") && transcript.includes("github")) {
-      window.open("https://www.github.com", "_blank");
-    } else if (transcript.includes("open") && (transcript.includes("this pc") || transcript.includes("my computer"))) {
-      window.open("file:///", "_blank");
-    } else if (transcript.includes("open") && transcript.includes("google")) {
-      window.open("https://www.google.com", "_blank");
-    } else if (transcript.includes("open") && transcript.includes("facebook")) {
-      window.open("https://www.facebook.com", "_blank");
-    } else if (transcript.includes("open") && transcript.includes("twitter")) {
-      window.open("https://www.twitter.com", "_blank");
-    } else if (transcript.includes("open") && transcript.includes("gmail")) {
-      window.open("https://mail.google.com", "_blank");
-    } else {
-      callGmini(transcript).then((res) => {
-        let newres: string | undefined = res?.replace("google", "Anas saifi") && res.replace("Google", "Anas saifi");
-        setResponseMessage(newres as string);
-        speak(newres);
-      });
-    }
-  }
+
   return (
     <div className="flex flex-col items-center text-center bg-black justify-around  min-h-screen  px-4">
+      <ChatsContainer isshowChats={isshowChats} setShowChats={setIsShowChats} />
       <img
         id="ai_girl"
         className="w-36 h-36 md:w-56 md:h-56 rounded-full shadow-lg mb-4 object-cover"
-        src={AIBoy}
+        src={AIGirl}
         alt="AI Assistant"
       />
+      {!isshowChats?<IoChatbubbleEllipsesOutline
+      onClick={() => setIsShowChats(true)}
+        className="
+        absolute 
+        top-10 right-5
+        md:right-1/5
+        text-4xl              
+        text-[#2dbabe]         
+        animate-bounce         
+        drop-shadow-lg         
+        transition-transform 
+        hover:scale-110        
+        hover:text-[#a33ba8] "
+      />:<></>
+      }
 
       <span className="text-2xl sm:text-2xl md:text-3xl bg-gradient-to-r from-[#2dbabe] to-[#a33ba8] bg-clip-text text-transparent">
         Hi I am Anas, Your Advanced Virtual Assistant
@@ -104,6 +95,8 @@ function App() {
           )}
         </>
       )}
+
+     
     </div>
   )
 }
