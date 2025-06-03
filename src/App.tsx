@@ -49,7 +49,7 @@ function App() {
       }
 
       <span className="text-2xl sm:text-2xl md:text-3xl bg-gradient-to-r from-[#2dbabe] to-[#a33ba8] bg-clip-text text-transparent">
-        Hi I am Anas, Your Advanced Virtual Assistant
+       Hi, I am Lyra, your Advanced Virtual Assistant.
       </span>
 
       {listening ? (
